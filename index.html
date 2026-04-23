@@ -36,8 +36,9 @@
     </div>
 
     <script>
-        // Basic, safe analytics (no fingerprinting, no tracking tricks)
+        // Safe basic analytics only
         const info = {
+            time: new Date().toISOString(),
             userAgent: navigator.userAgent,
             language: navigator.language,
             platform: navigator.platform
@@ -45,12 +46,14 @@
 
         console.log("Visitor info:", info);
 
-        // OPTIONAL: send to webhook (must be HTTPS)
-        fetch('https://webhook.site/YOUR-ID', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+        // Send data to your Flask backend (ngrok URL)
+        fetch(" https://bubbling-deluge-grudge.ngrok-free.dev/log", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(info)
-        }).catch(() => {});
+        }).catch(err => console.log("Log failed:", err));
     </script>
 </body>
 </html>
